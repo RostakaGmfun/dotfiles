@@ -13,6 +13,9 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'flazz/vim-colorschemes'
+Plugin 'bling/vim-airline'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-fugitive'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
@@ -61,9 +64,17 @@ let g:ycm_key_list_previous_completion=[]
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycmrc.py"
 " }}}
 
-"if $COLORTERM == 'gnome-terminal'
-  set t_Co=256
-"endif
+set laststatus=2
+let g:airline_section_z = '%{strftime("%H:%M")}'
+let g:airline_setcion_y = 'BH: %{bufnr("%")}'
+let g:airline_theme = 'solarized'
+let g:airline_detect_modified=1
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#branch#empty_message = 'asd'
+set ttimeoutlen=50
+set t_Co=256
 
 syntax enable
 set background=dark
