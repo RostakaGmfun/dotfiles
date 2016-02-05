@@ -16,6 +16,10 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'bling/vim-airline'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
+Plugin 'moll/vim-node'
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'zah/nim.vim'
+Plugin 'rust-lang/rust.vim'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
@@ -60,8 +64,9 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_use_ultisnips_completer = 1
 let g:ycm_key_list_select_completion=[]
 let g:ycm_key_list_previous_completion=[]
-
+let g:ycm_extra_conf_globlist = []
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycmrc.py"
+set completeopt-=preview
 " }}}
 
 set laststatus=2
@@ -101,12 +106,18 @@ nnoremap  <F7> <c-o>:tabnew<cr>
 nnoremap  <F8> <c-o>:tabclose<cr>
 nnoremap  <F9> <Esc>gT
 nnoremap  <F12> <Esc>gt
+nnoremap  ; :
 inoremap  <F7> <c-o>:tabnew<cr>
 inoremap  <F8> <c-o>:tabclose<cr>
 inoremap  <F9> <Esc>gT
 inoremap  <F12> <Esc>gt
 vnoremap <F5> "+y
 map      <F6> :put +<cr>
+noremap <Leader>s :update<CR>
+inoremap <Up> <NOP>
+inoremap <Down> <NOP>
+inoremap <Left> <NOP>
+inoremap <Right> <NOP>
 
 augroup mkd
   autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:>
