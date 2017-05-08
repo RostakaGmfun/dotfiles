@@ -1,8 +1,7 @@
-
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-" selllll runtime path to include Vundle and initialize
+" set runtime path to include Vundle and initialize
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -11,15 +10,11 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'bling/vim-airline'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
-Plugin 'moll/vim-node'
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'zah/nim.vim'
-Plugin 'rust-lang/rust.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
@@ -49,25 +44,6 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
-
-" YCM settings {{{
-let g:clang_library_path = "/usr/lib/"
-let g:clang_complete_copen = 0
-let g:clang_hl_errors = 1
-let g:clang_snippets = 1
-let g:clang_snippets_engine = "ultisnips"
-let g:clang_close_preview = 1
-let g:clang_complete_macros = 1
-
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_use_ultisnips_completer = 1
-let g:ycm_key_list_select_completion=[]
-let g:ycm_key_list_previous_completion=[]
-let g:ycm_extra_conf_globlist = []
-let g:ycm_global_ycm_extra_conf = "~/.vim/.ycmrc.py"
-set completeopt-=preview
-" }}}
 
 set laststatus=2
 let g:airline_section_z = '%{strftime("%H:%M")}'
@@ -124,8 +100,3 @@ augroup mkd
 augroup END
 
 autocmd FileType make setlocal noexpandtab
-
-
-if filereadable(".vimrc.custom")
-    so .vimrc.custom
-endif
