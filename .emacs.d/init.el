@@ -52,14 +52,8 @@
 (key-chord-mode 1)
 (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
 
-(key-chord-define evil-normal-state-map "m," 'evil-window-vsplit)
-(key-chord-define evil-insert-state-map "m," 'evil-window-vsplit)
-
-(key-chord-define evil-normal-state-map ".," 'evil-window-delete)
-(key-chord-define evil-insert-state-map ".," 'evil-window-delete)
-
-(key-chord-define evil-insert-state-map "we" 'evil-write)
-(key-chord-define evil-normal-state-map "we" 'evil-write)
+(key-chord-define evil-insert-state-map "qw" 'evil-write)
+(key-chord-define evil-normal-state-map "qw" 'evil-write)
 
 (set-default-font "DeJaVu Sans Mono-10")
 
