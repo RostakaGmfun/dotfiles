@@ -98,10 +98,8 @@
 (add-hook 'rust-mode-hook #'racer-mode)
 (add-hook 'racer-mode-hook #'eldoc-mode)
 (add-hook 'racer-mode-hook #'company-mode)
-; Rust mode
 
-(require 'rust-mode)
-(define-key rust-mode-map (kbd "C-SPC") #'company-complete-common)
+(global-set-key (kbd "C-SPC") #'company-complete-common)
 
 ;; SLIME
 (require 'slime)
