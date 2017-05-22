@@ -8,7 +8,7 @@
     ("ff7625ad8aa2615eae96d6b4469fcc7d3d20b2e1ebc63b761a349bebbb9d23cb" default)))
  '(package-selected-packages
    (quote
-    (auto-org-md diff-hl diff-hl-mode vimrc-mode slime nyan-mode key-chord fiplr python-mode magit company racer cmake-mode rust-mode ess nix-mode powerline smooth-scrolling solarized-theme helm evil-leader dracula-theme))))
+    (ox-twbs auto-org-md diff-hl diff-hl-mode vimrc-mode slime nyan-mode key-chord fiplr python-mode magit company racer cmake-mode rust-mode ess nix-mode powerline smooth-scrolling solarized-theme helm evil-leader dracula-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -18,7 +18,7 @@
 
 (require 'package)
 
-(setq package-list '(org diff-hl vimrc-mode slime rainbow-delimiters
+(setq package-list '(ox-twbs org diff-hl vimrc-mode slime rainbow-delimiters
                     key-chord anything cmake-mode
                     company dracula-theme ess
                     evil-leader evil fiplr
@@ -51,7 +51,6 @@
 (setq key-chord-two-keys-delay 0.1)
 (key-chord-mode 1)
 (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
-
 (key-chord-define evil-insert-state-map "qw" 'evil-write)
 (key-chord-define evil-normal-state-map "qw" 'evil-write)
 
@@ -67,6 +66,7 @@
 (scroll-bar-mode -1)
 (global-linum-mode 1)
 (setq-default truncate-lines 't)
+(setq system-time-locale "C")
 
 (require 'smooth-scrolling)
 (smooth-scrolling-mode 1)
@@ -112,5 +112,5 @@
 ;; Org-mode
 (global-set-key (kbd "C-c c") 'org-capture)
 (setq org-capture-templates
-      '(("j" "Diary" entry (file+datetree "~/diary/diary.org")
-         "* %T: %?")))
+      '(("j" "Diary" entry (file "~/diary/diary.org")
+         "** %^{prompt|%T} %?")))
