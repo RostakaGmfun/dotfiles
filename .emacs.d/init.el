@@ -59,6 +59,8 @@
 
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
+(setq c-basic-offset 4)
+(c-set-offset 'innamespace 0)
 
 (tool-bar-mode -1)
 (menu-bar-mode -1)
