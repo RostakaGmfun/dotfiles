@@ -113,4 +113,4 @@
 (global-set-key (kbd "C-c c") 'org-capture)
 (setq org-capture-templates
       '(("j" "Diary" entry (file "~/diary/diary.org")
-         "** %^{prompt|%T} %?")))
+         "** %^{prompt|%T} %?" :prepend :unnarrowed (:empty-lines 1))))
