@@ -40,6 +40,8 @@
 (require 'rainbow-delimiters)
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+
 ;; evil
 
 (require 'evil)
