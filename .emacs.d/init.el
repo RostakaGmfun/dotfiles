@@ -81,6 +81,8 @@
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 
+(global-git-gutter-mode 1)
+
 ;; Helm config
 
 (require 'helm-config)
@@ -92,8 +94,10 @@
 
 (require 'company)
 (company-mode 1)
+(global-set-key (kbd "C-SPC") #'company-complete-common)
 
 ;; fiplr
+
 (require 'fiplr)
 (global-set-key (kbd "C-x f") 'fiplr-find-file)
 
@@ -102,8 +106,6 @@
 (add-hook 'rust-mode-hook #'racer-mode)
 (add-hook 'racer-mode-hook #'eldoc-mode)
 (add-hook 'racer-mode-hook #'company-mode)
-
-(global-set-key (kbd "C-SPC") #'company-complete-common)
 
 ;; SLIME
 (require 'slime)
