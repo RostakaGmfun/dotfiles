@@ -82,6 +82,13 @@
 (setq auto-save-default nil)
 
 (global-git-gutter-mode 1)
+(setq-default git-gutter:modified-sign "~")
+(setq-default git-gutter:added-sign "+")
+(setq-default git-gutter:deleted-sign "\u2013") ;; en dash
+
+(set-face-foreground 'git-gutter:modified "orange")
+(set-face-foreground 'git-gutter:added "green")
+(set-face-foreground 'git-gutter:deleted "red")
 
 ;; Helm config
 
