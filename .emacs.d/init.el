@@ -39,6 +39,9 @@
 
 (require 'rainbow-delimiters)
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'prog-mode-hook (lambda ()
+                            (font-lock-add-keywords nil
+                             '(("\\<\\(FIXME\\|TODO\\|BUG\\):" 1 font-lock-warning-face t)))))
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
