@@ -8,7 +8,7 @@
     ("ff7625ad8aa2615eae96d6b4469fcc7d3d20b2e1ebc63b761a349bebbb9d23cb" default)))
  '(package-selected-packages
    (quote
-    (git-gutter ox-twbs auto-org-md diff-hl diff-hl-mode vimrc-mode slime nyan-mode key-chord fiplr python-mode magit company racer cmake-mode rust-mode ess nix-mode powerline smooth-scrolling solarized-theme helm evil-leader dracula-theme))))
+    (evil-magit git-gutter ox-twbs auto-org-md diff-hl diff-hl-mode vimrc-mode slime nyan-mode key-chord fiplr python-mode magit company racer cmake-mode rust-mode ess nix-mode powerline smooth-scrolling solarized-theme helm evil-leader dracula-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -18,7 +18,7 @@
 
 (require 'package)
 
-(setq package-list '(git-gutter ox-twbs org diff-hl vimrc-mode slime rainbow-delimiters
+(setq package-list '(evil-magit git-gutter ox-twbs org diff-hl vimrc-mode slime rainbow-delimiters
                     key-chord anything cmake-mode
                     company dracula-theme ess
                     evil-leader evil fiplr
@@ -82,6 +82,8 @@
 
 (setq make-backup-files nil)
 (setq auto-save-default nil)
+
+(global-unset-key (kbd "C-x C-c"))
 
 (global-git-gutter-mode 1)
 (setq-default git-gutter:modified-sign "~")
