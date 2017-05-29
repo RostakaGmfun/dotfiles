@@ -68,7 +68,8 @@
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (global-linum-mode 1)
-(setq-default truncate-lines 't)
+(setq-default truncate-lines t)
+(setq-default show-trailing-whitespace t)
 (setq system-time-locale "C")
 
 (require 'smooth-scrolling)
