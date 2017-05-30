@@ -67,6 +67,8 @@
 (c-set-offset 'arglist-cont-nonempty '++)
 (c-set-offset 'innamespace 0)
 
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
