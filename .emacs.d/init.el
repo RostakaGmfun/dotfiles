@@ -116,6 +116,8 @@
 
 (require 'fiplr)
 (global-set-key (kbd "C-x f") 'fiplr-find-file)
+(global-set-key (kbd "C-c f") 'fiplr-find-file-other-window)
+(setq-default fiplr-ignored-globs '((directories (".git" "build")) (files ("#*" "*~"))))
 
 ;; Racer config
 
