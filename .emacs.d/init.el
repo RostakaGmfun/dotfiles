@@ -136,3 +136,8 @@
 (setq org-capture-templates
       '(("j" "Diary" entry (file "~/diary/diary.org")
          "** %^{prompt|%T} %?" :prepend :unnarrowed (:empty-lines 1))))
+(add-hook 'org-mode-hook (lambda () (add-to-list 'org-export-backends 'texinfo)))
+(setq org-todo-keywords '((sequence "TODO" "DOING" "|" "DONE")))
+(setq org-todo-keyword-faces '(("TODO" . org-warning)
+                               ("DOING" . (:foreground "green" :weight bold))
+                               ("DONE" . "cyan")))
