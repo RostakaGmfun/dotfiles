@@ -8,7 +8,7 @@
     ("ff7625ad8aa2615eae96d6b4469fcc7d3d20b2e1ebc63b761a349bebbb9d23cb" default)))
  '(package-selected-packages
    (quote
-    (evil-magit git-gutter ox-twbs auto-org-md diff-hl diff-hl-mode vimrc-mode slime nyan-mode key-chord fiplr python-mode magit company racer cmake-mode rust-mode ess nix-mode powerline smooth-scrolling solarized-theme helm evil-leader dracula-theme))))
+    (company-nixos-options evil-magit git-gutter ox-twbs auto-org-md diff-hl diff-hl-mode vimrc-mode slime nyan-mode key-chord fiplr python-mode magit company racer cmake-mode rust-mode ess nix-mode powerline smooth-scrolling solarized-theme helm evil-leader dracula-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -18,15 +18,16 @@
 
 (require 'package)
 
-(setq package-list '(evil-magit git-gutter ox-twbs org diff-hl vimrc-mode slime rainbow-delimiters
-                    key-chord anything cmake-mode
-                    company dracula-theme ess
-                    evil-leader evil fiplr
-                    goto-chg grizzl helm helm-core
-                    julia-mode magit git-commit magit-popup
-                    nix-mode popup powerline python-mode
-                    racer f rust-mode s smooth-scrolling
-                    solarized-theme undo-tree with-editor dash async))
+(setq package-list '(company-nixos-options
+                     evil-magit git-gutter ox-twbs org diff-hl
+                     vimrc-mode slime rainbow-delimiters key-chord
+                     anything cmake-mode company dracula-theme ess
+                     evil-leader evil fiplr goto-chg grizzl helm
+                     helm-core julia-mode magit git-commit
+                     magit-popup nix-mode popup powerline
+                     python-mode racer f rust-mode s
+                     smooth-scrolling solarized-theme undo-tree
+                     with-editor dash async))
 
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.org/packages/") t)
@@ -109,8 +110,11 @@
 ;; Company config
 
 (require 'company)
-(company-mode 1)
-(global-set-key (kbd "C-SPC") #'company-complete-common)
+(add-hook 'prog-mode-hook
+          (lambda ()
+            (company-mode)
+            (local-set-key (kbd "C-SPC") #'company-complete-common)))
+(add-to-list 'company-backends 'company-nixos-options)
 
 ;; fiplr
 
