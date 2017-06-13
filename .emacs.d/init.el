@@ -145,3 +145,6 @@
 (setq org-todo-keyword-faces '(("TODO" . org-warning)
                                ("DOING" . (:foreground "green" :weight bold))
                                ("DONE" . "cyan")))
+
+;; magit
+(global-set-key (kbd "C-c m") 'magit-status)
