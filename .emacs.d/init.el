@@ -1,21 +1,3 @@
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   (quote
-    ("ff7625ad8aa2615eae96d6b4469fcc7d3d20b2e1ebc63b761a349bebbb9d23cb" default)))
- '(package-selected-packages
-   (quote
-    (company-nixos-options evil-magit git-gutter ox-twbs auto-org-md diff-hl diff-hl-mode vimrc-mode slime nyan-mode key-chord fiplr python-mode magit company racer cmake-mode rust-mode ess nix-mode powerline smooth-scrolling solarized-theme helm evil-leader dracula-theme))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-
 (require 'package)
 
 (setq package-list '(company-nixos-options
@@ -42,7 +24,7 @@
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'prog-mode-hook (lambda ()
                             (font-lock-add-keywords nil
-                             '(("\\<\\(FIXME\\|TODO\\|BUG\\):" 1 font-lock-warning-face t)))))
+                             '(("\\<\\(FIXME\\|TODO\\|BUG\\)" 1 font-lock-warning-face t)))))
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
@@ -81,7 +63,7 @@
 (require 'smooth-scrolling)
 (smooth-scrolling-mode 1)
 
-(load-theme 'dracula)
+(load-theme 'dracula t)
 
 (require 'powerline)
 (powerline-default-theme)
@@ -140,11 +122,10 @@
 (setq org-capture-templates
       '(("j" "Diary" entry (file "~/diary/diary.org")
          "** %^{prompt|%T} %?" :prepend :unnarrowed (:empty-lines 1))))
-(add-hook 'org-mode-hook (lambda () (add-to-list 'org-export-backends 'texinfo)))
 (setq org-todo-keywords '((sequence "TODO" "DOING" "|" "DONE")))
 (setq org-todo-keyword-faces '(("TODO" . org-warning)
                                ("DOING" . (:foreground "green" :weight bold))
                                ("DONE" . "cyan")))
-
 ;; magit
 (global-set-key (kbd "C-c m") 'magit-status)
+(add-hook 'magit-mode-hook 'evil-magit-init)
