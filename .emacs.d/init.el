@@ -1,6 +1,6 @@
 (require 'package)
 
-(setq package-list '(company-nixos-options
+(setq package-list '(plantuml-mode company-nixos-options
                      evil-magit git-gutter ox-twbs org diff-hl
                      vimrc-mode slime rainbow-delimiters key-chord
                      anything cmake-mode company dracula-theme ess
@@ -27,6 +27,8 @@
                              '(("\\<\\(FIXME\\|TODO\\|BUG\\)" 1 font-lock-warning-face t)))))
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+(setq shell-file-name "/bin/sh")
 
 ;; evil
 
@@ -59,6 +61,7 @@
 (setq-default truncate-lines t)
 (setq-default show-trailing-whitespace t)
 (setq system-time-locale "C")
+(setq split-width-threshold nil)
 
 (require 'smooth-scrolling)
 (smooth-scrolling-mode 1)
@@ -129,3 +132,10 @@
 ;; magit
 (global-set-key (kbd "C-c m") 'magit-status)
 (add-hook 'magit-mode-hook 'evil-magit-init)
+
+;; plantuml-mode
+;; Use system `plantuml` executable from default Nix profile rather
+;; than  plain JAR file
+(setq plantuml-jar-path "")
+(setq plantuml-java-command "plantuml")
+(setq plantuml-java-args "")
