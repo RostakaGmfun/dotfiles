@@ -44,7 +44,7 @@
 (key-chord-define evil-insert-state-map "qw" 'evil-write)
 (key-chord-define evil-normal-state-map "qw" 'evil-write)
 
-(set-default-font "DeJaVu Sans Mono-10")
+(add-to-list 'default-frame-alist '(font . "DeJaVu Sans Mono-12"))
 
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
