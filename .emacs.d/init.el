@@ -9,7 +9,7 @@
                      magit-popup nix-mode popup powerline
                      python-mode racer f rust-mode s
                      smooth-scrolling solarized-theme undo-tree
-                     with-editor dash async))
+                     with-editor dash async go-mode flymake-go))
 
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.org/packages/") t)
@@ -100,6 +100,8 @@
             (company-mode)
             (local-set-key (kbd "C-SPC") #'company-complete-common)))
 (add-to-list 'company-backends 'company-nixos-options)
+(add-hook 'after-init-hook 'global-company-mode)
+(add-to-list 'company-backends 'company-nixos-options 'company-clang)
 
 ;; fiplr
 
@@ -112,7 +114,6 @@
 
 (add-hook 'rust-mode-hook #'racer-mode)
 (add-hook 'racer-mode-hook #'eldoc-mode)
-(add-hook 'racer-mode-hook #'company-mode)
 
 ;; SLIME
 (require 'slime)
