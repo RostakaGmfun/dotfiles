@@ -1,6 +1,6 @@
 (require 'package)
 
-(setq package-list '(plantuml-mode company-nixos-options
+(setq package-list '(helm-gtags plantuml-mode company-nixos-options
                      evil-magit git-gutter ox-twbs org diff-hl
                      vimrc-mode slime rainbow-delimiters key-chord
                      anything cmake-mode company dracula-theme ess
@@ -95,13 +95,11 @@
 ;; Company config
 
 (require 'company)
-(add-hook 'prog-mode-hook
-          (lambda ()
-            (company-mode)
-            (local-set-key (kbd "C-SPC") #'company-complete-common)))
-(add-to-list 'company-backends 'company-nixos-options)
 (add-hook 'after-init-hook 'global-company-mode)
 (add-to-list 'company-backends 'company-nixos-options 'company-clang)
+
+(add-hook 'prog-mode-hook 'helm-gtags-mode)
+(add-hook 'prog-mode-hook (lambda () (global-set-key (kbd "C-c C-j") 'helm-gtags-dwim)))
 
 ;; fiplr
 
