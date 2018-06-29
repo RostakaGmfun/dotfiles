@@ -97,6 +97,10 @@
 (require 'company)
 (add-hook 'after-init-hook 'global-company-mode)
 (add-to-list 'company-backends 'company-nixos-options 'company-clang)
+(add-hook 'prog-mode-hook
+          (lambda ()
+            (company-mode)
+            (local-set-key (kbd "C-SPC") #'company-complete-common)))
 
 (add-hook 'prog-mode-hook 'helm-gtags-mode)
 (add-hook 'prog-mode-hook (lambda () (global-set-key (kbd "C-c C-j") 'helm-gtags-dwim)))
