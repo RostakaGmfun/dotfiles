@@ -133,6 +133,11 @@
                                ("DOING" . (:foreground "green" :weight bold))
                                ("DONE" . "cyan")))
 ;; magit
+(defun magit-split ()
+  (interactive)
+  (if (< (length (window-list)) 2)
+      (split-window-horizontally)())
+  (magit-status))
 (global-set-key (kbd "C-c m") 'magit-status)
 (add-hook 'magit-mode-hook 'evil-magit-init)
 
