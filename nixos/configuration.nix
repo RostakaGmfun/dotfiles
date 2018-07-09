@@ -26,6 +26,8 @@ let
             grub.device = "nodev";
         };
 
+        boot.kernelPackages = pkgs.linuxPackages_4_9;
+
         boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" ];
         boot.kernelModules = [ "kvm-intel" ];
 
