@@ -83,6 +83,13 @@ in
     nixpkgs.config.virtualbox.enableExtensionPack = true;
 
     virtualisation.docker.enable = true;
+
+
+    nix.nixPath = [
+      "nixos-config=/home/gmfun/dotfiles/nixos/configuration.nix"
+      "/home/gmfun/dotfiles/nix-channels"
+    ];
+
     i18n = {
         consoleFont = "latarcyrheb-sun32";
         consoleKeyMap = "us";
