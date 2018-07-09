@@ -82,6 +82,7 @@ in
     virtualisation.virtualbox.host.enable = true;
     nixpkgs.config.virtualbox.enableExtensionPack = true;
 
+    virtualisation.docker.enable = true;
     i18n = {
         consoleFont = "latarcyrheb-sun32";
         consoleKeyMap = "us";
@@ -92,28 +93,28 @@ in
 
     environment.systemPackages = with pkgs; [
         clearlooks-phenix
-	dmenu
-	emacs
-	git
-	godef
+        dmenu
+        emacs
+        git
+        godef
         google-chrome
         hicolor_icon_theme
         htop
-	i3lock
-	minicom
+        i3lock
+        minicom
         networkmanagerapplet
-	nox
-	okular
+        nox
+        okular
         oxygen-icons5
         pavucontrol
         shared_mime_info
-	slack
-	unzip
+        slack
+        unzip
         vim
-	vlc
+        vlc
         wget
-	xorg.xkill
-	zip
+        xorg.xkill
+        zip
     ];
 
     environment.variables = { XDG_CURRENT_DESKTOP = "kde"; };
@@ -149,7 +150,7 @@ in
     users.extraGroups.plugdev = { };
 
     users.extraUsers.gmfun = {
-        extraGroups = ["wheel" "vboxusers" "plugdev"];
+        extraGroups = ["wheel" "vboxusers" "plugdev" "docker"];
         home = "/home/gmfun";
         shell = pkgs.fish;
         isNormalUser = true;
