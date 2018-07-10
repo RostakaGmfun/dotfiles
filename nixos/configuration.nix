@@ -52,11 +52,11 @@ let
         };
 
         services.xserver = {
-            synaptics.enable = true;
-            synaptics.twoFingerScroll = true;
-            synaptics.vertEdgeScroll = true;
+            libinput = {
+              enable = true;
+              disableWhileTyping = true;
+            };
             dpi = 101;
-
             videoDrivers = [ "intel" ];
         };
 
