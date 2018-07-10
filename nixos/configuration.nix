@@ -117,6 +117,7 @@ in
         shared_mime_info
         slack
         unzip
+        vagrant
         vim
         vlc
         wget
