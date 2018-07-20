@@ -105,6 +105,7 @@ in
         git
         godef
         google-chrome
+        global
         hicolor_icon_theme
         htop
         i3lock
