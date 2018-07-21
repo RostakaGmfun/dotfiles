@@ -9,7 +9,8 @@
                      magit-popup nix-mode popup powerline
                      python-mode racer f rust-mode s
                      smooth-scrolling solarized-theme undo-tree
-                     with-editor dash async go-mode flymake-go))
+                     with-editor dash async go-mode flymake-go
+                     company-rtags helm-rtags))
 
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.org/packages/") t)
@@ -96,7 +97,7 @@
 
 (require 'company)
 (add-hook 'after-init-hook 'global-company-mode)
-(add-to-list 'company-backends 'company-nixos-options 'company-clang)
+(add-to-list 'company-backends 'company-nixos-options 'company-rtags)
 (add-hook 'prog-mode-hook
           (lambda ()
             (company-mode)

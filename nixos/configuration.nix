@@ -74,7 +74,28 @@ in
 {
   imports = [
     {
-    nixpkgs.config.allowUnfree = true;
+
+    nixpkgs.config = {
+      allowUnfree = true;
+
+      # Override rtags package with a newer version compatible with rtags
+      packageOverrides = pkgs: rec {
+        rtags = pkgs.rtags.overrideDerivation (oldAttrs: {
+            name = "rtags-2.10";
+            src = pkgs.fetchgit {
+              rev = "refs/tags/v2.10";
+              fetchSubmodules = true;
+              url = "https://github.com/andersbakken/rtags.git";
+              sha256 = "0rv5hz4cfc1adpxvp4j4227nfc0p0yrjdc6l9i32jj11p69a5401";
+              # unicode file names lead to different checksums on HFS+ vs. other
+              # filesystems because of unicode normalisation
+              postFetch = ''
+              rm $out/src/rct/tests/testfile_*.txt
+              '';
+            };
+        });
+      };
+    };
 
     networking.hostName = machine.name;
     networking.networkmanager.enable = true;
@@ -103,24 +124,26 @@ in
         dmenu
         emacs
         git
+        global
         godef
         google-chrome
-        global
         hicolor_icon_theme
         htop
         i3lock
         minicom
+        nix-prefetch-scripts
         networkmanagerapplet
         nox
         okular
         oxygen-icons5
         pavucontrol
+        python36Packages.virtualenv
+        rtags
         shared_mime_info
         slack
         unzip
         vagrant
         vim
-        python36Packages.virtualenv
         vlc
         wget
         xorg.xkill
@@ -165,6 +188,26 @@ in
         shell = pkgs.fish;
         isNormalUser = true;
         initialPassword = "password";
+    };
+
+    systemd.sockets.rdm  = {
+      description = "rtags daemon socket";
+      listenStreams = [ "%t/rdm.socket" ];
+      wantedBy = [ "default.target" ];
+    };
+
+    systemd.services.rdm  = {
+      description = "rtags daemon for emacs-rtags";
+      wantedBy = [ "default.target" ];
+      requires = [ "rdm.socket" ];
+      serviceConfig = {
+        Type = "simple";
+        User = "gmfun";
+        ExecStart = "${pkgs.rtags}/bin/rdm";
+        ExecStop = "";
+        Nice = 19;
+        CPUSchedulingPolicy="idle";
+      };
     };
 
     }
