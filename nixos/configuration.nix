@@ -120,6 +120,7 @@ in
         unzip
         vagrant
         vim
+        python36Packages.virtualenv
         vlc
         wget
         xorg.xkill
