@@ -81,12 +81,13 @@ in
       # Override rtags package with a newer version compatible with rtags
       packageOverrides = pkgs: rec {
         rtags = pkgs.rtags.overrideDerivation (oldAttrs: {
-            name = "rtags-2.10";
+            name = "rtags-2.18";
             src = pkgs.fetchgit {
-              rev = "refs/tags/v2.10";
+              # This commit fixes protocol version mismatch between elisp and C++ code (124 vs 125)
+              rev = "163c81ea636c2aaca78e76df174bfd5679015bd7";
               fetchSubmodules = true;
               url = "https://github.com/andersbakken/rtags.git";
-              sha256 = "0rv5hz4cfc1adpxvp4j4227nfc0p0yrjdc6l9i32jj11p69a5401";
+              sha256 = "0g4d4cv8fp55f5k6qlq7kvmwkmrc34fg6dq5w4mj67zmga21mqzp";
               # unicode file names lead to different checksums on HFS+ vs. other
               # filesystems because of unicode normalisation
               postFetch = ''
@@ -120,6 +121,7 @@ in
     time.timeZone = "Europe/Kiev";
 
     environment.systemPackages = with pkgs; [
+        libcxx
         clearlooks-phenix
         dmenu
         emacs
@@ -191,22 +193,20 @@ in
     };
 
     systemd.sockets.rdm  = {
-      description = "rtags daemon socket";
-      listenStreams = [ "%t/rdm.socket" ];
-      wantedBy = [ "default.target" ];
+      description = "rtags daemon socket1";
+      wantedBy = [ "sockets.target" ];
+      listenStreams = [ "/tmp/rdm.socket" ];
     };
 
     systemd.services.rdm  = {
       description = "rtags daemon for emacs-rtags";
-      wantedBy = [ "default.target" ];
       requires = [ "rdm.socket" ];
       serviceConfig = {
         Type = "simple";
-        User = "gmfun";
-        ExecStart = "${pkgs.rtags}/bin/rdm";
-        ExecStop = "";
+        ExecStart = "${pkgs.rtags}/bin/rdm -v --log-flush --socket-file /tmp/rdm.socket --isystem ${pkgs.libcxx}/include/c++/v1";
+        ExecStartPost = ''/bin/sh -c "echo +19 > /proc/$MAINPID/autogroup"'';
         Nice = 19;
-        CPUSchedulingPolicy="idle";
+        CPUSchedulingPolicy = "idle";
       };
     };
 

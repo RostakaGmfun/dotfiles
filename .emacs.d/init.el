@@ -1,6 +1,6 @@
 (require 'package)
 
-(setq package-list '(helm-gtags plantuml-mode company-nixos-options
+(setq package-list '(plantuml-mode company-nixos-options
                      evil-magit git-gutter ox-twbs org diff-hl
                      vimrc-mode slime rainbow-delimiters key-chord
                      anything cmake-mode company dracula-theme ess
@@ -10,7 +10,7 @@
                      python-mode racer f rust-mode s
                      smooth-scrolling solarized-theme undo-tree
                      with-editor dash async go-mode flymake-go
-                     company-rtags helm-rtags))
+                     rtags helm-rtags company-rtags flycheck-rtags))
 
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.org/packages/") t)
@@ -97,14 +97,11 @@
 
 (require 'company)
 (add-hook 'after-init-hook 'global-company-mode)
-(add-to-list 'company-backends 'company-nixos-options 'company-rtags)
+(global-company-mode)
+(push 'company-rtags company-backends)
 (add-hook 'prog-mode-hook
           (lambda ()
-            (company-mode)
-            (local-set-key (kbd "C-SPC") #'company-complete-common)))
-
-(add-hook 'prog-mode-hook 'helm-gtags-mode)
-(add-hook 'prog-mode-hook (lambda () (global-set-key (kbd "C-c C-j") 'helm-gtags-dwim)))
+            (local-set-key (kbd "C-SPC") #'company-complete)))
 
 ;; fiplr
 
@@ -148,3 +145,9 @@
 (setq plantuml-jar-path "")
 (setq plantuml-java-command "plantuml")
 (setq plantuml-java-args "")
+
+(setq rtags-socket-file "/tmp/rdm.socket")
+(setq rtags-autostart-diagnostics t)
+(setq rtags-completions-enabled t)
+(setq rtags-display-result-backend 'helm)
+(add-hook 'prog-mode-hook (lambda () (global-set-key (kbd "C-c C-j") 'rtags-find-symbol-at-point)))
