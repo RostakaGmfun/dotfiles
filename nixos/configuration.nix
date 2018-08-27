@@ -2,6 +2,61 @@
 let
   machine = import ./machine.nix;
   machine-config = {
+    thinkpad = [
+    {
+        imports =
+            [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
+            ];
+
+        boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
+        boot.kernelModules = [ "kvm-intel" ];
+        boot.extraModulePackages = [ ];
+
+        fileSystems."/" =
+            { device = "/dev/disk/by-uuid/0d9fbb1c-e4ab-49fb-b5d3-aa1a70cd6d0c";
+            fsType = "ext4";
+            };
+
+        fileSystems."/boot" =
+            { device = "/dev/disk/by-uuid/F752-B063";
+            fsType = "vfat";
+            };
+
+        swapDevices = [ ];
+
+        nix.maxJobs = lib.mkDefault 8;
+        powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+
+        # Use the systemd-boot EFI boot loader.
+        boot.loader = {
+            systemd-boot.enable = true;
+            efi.canTouchEfiVariables = true;
+            grub.efiSupport = true;
+            grub.device = "nodev";
+        };
+
+        hardware.nvidiaOptimus.disable = true;
+
+        hardware.pulseaudio = {
+            enable = true;
+            support32Bit = true;
+        };
+
+        services.xserver = {
+            libinput = {
+              enable = true;
+              disableWhileTyping = true;
+            };
+            dpi = 96;
+            videoDrivers = [ "intel" ];
+        };
+
+        fonts.fontconfig.dpi = 156;
+
+        services.tlp.enable = true;
+        programs.light.enable = true;
+    }
+    ];
     zen = [
     {
 	imports = [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix> ];
@@ -66,6 +121,7 @@ let
 
         environment.systemPackages = with pkgs; [
           kicad
+          light
         ];
         }
     ];
@@ -101,8 +157,8 @@ in
     networking.hostName = machine.name;
     networking.networkmanager.enable = true;
 
-    virtualisation.virtualbox.host.enable = true;
-    nixpkgs.config.virtualbox.enableExtensionPack = true;
+    #virtualisation.virtualbox.host.enable = true;
+    #nixpkgs.config.virtualbox.enableExtensionPack = true;
 
     virtualisation.docker.enable = true;
 
@@ -124,6 +180,7 @@ in
         libcxx
         clearlooks-phenix
         dmenu
+        dolphin
         emacs
         git
         global
@@ -132,6 +189,7 @@ in
         hicolor_icon_theme
         htop
         i3lock
+        i3status
         minicom
         nix-prefetch-scripts
         networkmanagerapplet
@@ -152,6 +210,7 @@ in
         zip
     ];
 
+
     environment.variables = { XDG_CURRENT_DESKTOP = "kde"; };
 
     # Enable the OpenSSH daemon.
@@ -169,6 +228,7 @@ in
         dbus-launch ${pkgs.networkmanagerapplet}/bin/nm-applet &
         '';
         windowManager.i3.enable = true;
+        desktopManager.plasma5.enable = true;
     };
 
 
@@ -209,6 +269,10 @@ in
         CPUSchedulingPolicy = "idle";
       };
     };
+
+    services.printing.enable = true;
+    services.avahi.enable = true;
+    services.avahi.nssmdns = true;
 
     }
   ] ++ machine-config;
