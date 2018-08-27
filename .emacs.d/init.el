@@ -52,6 +52,7 @@
 (setq-default c-basic-offset 4)
 (c-set-offset 'arglist-cont-nonempty '++)
 (c-set-offset 'innamespace 0)
+(c-set-offset 'inextern-lang 0)
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
