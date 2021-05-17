@@ -53,9 +53,15 @@
 (use-package rainbow-delimiters
     :hook (prog-mode . rainbow-delimiters-mode))
 
+(use-package undo-tree
+    :config
+    (global-undo-tree-mode 1))
+
 (use-package evil
     :init
     (setq evil-want-keybinding nil)
+    (setq evil-undo-system 'undo-tree)
+    :hook (’evil-local-mode-hook ’turn-on-undo-tree-mode)
     :config
     (evil-mode 1))
 
