@@ -22,7 +22,7 @@
 ;;
 ;; Other Emacs settings
 ;;
-
+(setq make-backup-files nil)
 (setq auto-save-default nil)
 ;; Disable exit hotkey
 (global-unset-key (kbd "C-x C-c"))
@@ -129,3 +129,5 @@
 
 (use-package cmake-mode)
 (use-package markdown-mode)
+(use-package nix-mode)
+(use-package rust-mode)
